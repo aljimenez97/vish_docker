@@ -1,0 +1,23 @@
+version: '2.1'
+services:
+  vish:
+    build: ./vish  #use local version
+    container_name: "vish"
+    networks:
+      vish-bd:
+        ipv4_address: "20.2.0.2"  
+  bd:
+    build: ./bd  #use local version
+    container_name: "bd"
+    networks:
+      vish-bd:
+        ipv4_address: "20.2.0.31"
+networks:
+  vish-bd:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 20.2.0.0/24
+         gateway: 20.2.0.70
+volumes:
+  nas:
